@@ -1,0 +1,9 @@
+{
+  "baseUrl": "https://www.freelancer.com/",
+  "chromeWebSecurity": false,
+  "video": false,
+  "viewportWidth": 1200,
+  "viewportHeight": 1080,
+  "supportFile": "cypress/support/index.ts",
+  "pluginsFile": "cypress/plugins/index.js"
+}
