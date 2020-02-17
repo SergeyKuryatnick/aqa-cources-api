@@ -25,9 +25,9 @@ export class LogInHelper {
                 url: urlLogin,
                 form: true,
                 body: {
-                    'device_token': result.token,
-                    'user': userLogin,
-                    'password': userPass
+                    device_token: result.token,
+                    user: userLogin,
+                    password: userPass
                 }
             }).then(({body: {result: {token, user}}}) => {
                 expect(token).to.be.a('string');
