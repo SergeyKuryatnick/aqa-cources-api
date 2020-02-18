@@ -1,38 +1,36 @@
 /// <reference types="cypress" />
 
+import {loginData} from "../fixtures/test-data";
 import Chainable = Cypress.Chainable;
-import Response = Cypress.Response;
-
-const urlGetDeviceToken = 'https://www.freelancer.com/auth/device/';
-const urlLogin = 'https://www.freelancer.com/ajax/auth/login.php';
-const userLogin = 'anton.olkhovskyi@valor-software.com';
-const userPass = 'bc?+c6QW@Cpv6u&';
 
 export class LogInHelper {
     private userToken = null;
-    private deviceToken = null;
 
+    login(): Chainable {
+        if(this.userToken){
+            return cy.log('you are logged in already');
+        }
 
-    login(): Chainable<Response> {
         return cy.request({
             method: 'GET',
-            url: urlGetDeviceToken
+            url: loginData.urlGetDeviceToken
         }).then(({body: {result}, status}) => {
             expect(status).to.eq(200);
 
             return cy.request({
                 method: 'POST',
-                url: urlLogin,
+                url: loginData.urlLogin,
                 form: true,
                 body: {
                     device_token: result.token,
-                    user: userLogin,
-                    password: userPass
+                    user: loginData.userLogin,
+                    password: loginData.userPass
                 }
             }).then(({body: {result: {token, user}}}) => {
                 expect(token).to.be.a('string');
                 cy.setCookie('GETAFREE_AUTH_HASH_V2', `${token}`);
                 cy.setCookie('GETAFREE_USER_ID', `${user}`);
+                this.userToken = user;
                 return;
             })
         });

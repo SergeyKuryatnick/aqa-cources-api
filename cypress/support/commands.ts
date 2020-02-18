@@ -1,8 +1,10 @@
 import {LogInHelper} from "./login-helper";
 
-declare namespace Cypress {
-    interface Chainable<Response> {
-        login(): Chainable<Response>;
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            login(): Chainable;
+        }
     }
 }
 
