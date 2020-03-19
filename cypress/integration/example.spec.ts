@@ -5,13 +5,12 @@ describe('First spec', () => {
         cy.login();
     });
     beforeEach(() => {
-        Cypress.Cookies.preserveOnce('GETAFREE_AUTH_HASH_V2', 'GETAFREE_USER_ID');
         cy.visit('');
     });
 
-    after(() => {
-        cy.clearCookie('GETAFREE_AUTH_HASH_V2')
-    });
+    // after(() => {
+    //     cy.clearCookie('GETAFREE_AUTH_HASH_V2')
+    // });
 
     // First test will call full login chain
     it('123', () => {
