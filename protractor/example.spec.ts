@@ -7,12 +7,11 @@ const userLogin = 'anton.olkhovskyi@valor-software.com';
 const userPass = 'bc?+c6QW@Cpv6u&';
 
 describe('First spec', () => {
-    let ahaha: {body:{}};
     beforeAll(async() =>{
-        await get({
+        const deviceToken = await get({
             uri: urlGetDeviceToken,
             json: true,
-        }).then(async(response: Response) => {
+        }).then(async(response) => {
             // browser.sleep(100);
             // console.log(await typeof response.body)
             // await post({
@@ -24,20 +23,20 @@ describe('First spec', () => {
             //         device_token: response
             //     }
             // })
-            ahaha = response;
-            return ;
-        })
-
-        await post({
+            return response.result.token;
+        });
+        
+        const consoles = await post({
             uri: urlLogin,
                 json: true,
-                body: {
+                form:{
                     user: userLogin,
                     password: userPass,
-                    device_token: ahaha
+                    device_token: deviceToken
                 }
-            })
-        console.log(ahaha.body)
+            });
+        console.log(consoles);
+
     });
 
     it('123', () => {

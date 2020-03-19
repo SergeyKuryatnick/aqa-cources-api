@@ -27,6 +27,7 @@ export class LogInHelper {
                     password: loginData.userPass
                 }
             }).then(({body: {result: {token, user}}}) => {
+                Cypress.Cookies.debug(true);
                 expect(token).to.be.a('string');
                 cy.setCookie('GETAFREE_AUTH_HASH_V2', `${token}`);
                 cy.setCookie('GETAFREE_USER_ID', `${user}`);

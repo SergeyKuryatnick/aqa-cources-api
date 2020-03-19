@@ -1,10 +1,16 @@
 /// <reference types="cypress" />
 
 describe('First spec', () => {
-    beforeEach(() => {
+    before(() => {
         cy.login();
+    });
+    beforeEach(() => {
         Cypress.Cookies.preserveOnce('GETAFREE_AUTH_HASH_V2', 'GETAFREE_USER_ID');
         cy.visit('');
+    });
+
+    after(() => {
+        cy.clearCookie('GETAFREE_AUTH_HASH_V2')
     });
 
     // First test will call full login chain
